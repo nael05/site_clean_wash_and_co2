@@ -21,8 +21,6 @@ window.addEventListener('scroll', () => {
     }
 
     if (!navLinks.classList.contains('active')) {
-        
-        
         if (scrollTop > lastScrollTop && scrollTop > 100) {
             navbar.style.transform = 'translateY(-100%)';
         } else {
@@ -43,12 +41,12 @@ navToggle.addEventListener('click', () => {
         spans[0].style.transform = 'rotate(45deg) translateY(10px)';
         spans[1].style.opacity = '0';
         spans[2].style.transform = 'rotate(-45deg) translateY(-10px)';
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        document.body.style.overflow = 'hidden'; 
     } else {
         spans[0].style.transform = 'none';
         spans[1].style.opacity = '1';
         spans[2].style.transform = 'none';
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = ''; 
     }
 });
 
@@ -123,14 +121,13 @@ function animateCounters() {
     const rect = statsSection.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     
-    // Trigger when section is 60% visible
     if (rect.top <= windowHeight * 0.8 && rect.bottom >= 0) {
         hasAnimated = true;
         
         statNumbers.forEach(stat => {
             const target = parseInt(stat.getAttribute('data-target'));
-            const duration = 2000; // 2 seconds
-            const increment = target / (duration / 16); // 60fps
+            const duration = 2000; 
+            const increment = target / (duration / 16); 
             let current = 0;
             
             const updateCounter = () => {
@@ -149,7 +146,6 @@ function animateCounters() {
 }
 
 window.addEventListener('scroll', animateCounters);
-// Also try on load in case it's already visible
 window.addEventListener('load', animateCounters);
 
 // ===================================
@@ -167,7 +163,6 @@ function initAOS() {
                 setTimeout(() => {
                     entry.target.classList.add('aos-animate');
                 }, delay);
-                // Optionally unobserve after animation
                 observer.unobserve(entry.target);
             }
         });
@@ -181,7 +176,6 @@ function initAOS() {
     });
 }
 
-// Initialize AOS when DOM is fully loaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAOS);
 } else {
@@ -194,56 +188,42 @@ if (document.readyState === 'loading') {
 const sliders = document.querySelectorAll('.comparison-slider');
 
 sliders.forEach(slider => {
-    // Elements
     const beforeImage = slider.querySelector('.c-before');
-    const beforeImgTag = beforeImage.querySelector('img');
     const handle = slider.querySelector('.c-handle');
     let isDown = false;
 
-    // Functions
     const move = (e) => {
         if (!isDown) return;
         
-        // Get dimensions
         const rect = slider.getBoundingClientRect();
         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         const x = clientX - rect.left;
         
-        // Boundaries
         let position = Math.max(0, Math.min(x, rect.width));
         let percentage = (position / rect.width) * 100;
 
-        // Apply styles
         beforeImage.style.width = `${percentage}%`;
         handle.style.left = `${percentage}%`;
     };
 
-    // Event Listeners - Mouse
     slider.addEventListener('mousedown', (e) => {
         isDown = true;
         move(e);
     });
     
-    window.addEventListener('mouseup', () => {
-        isDown = false;
-    });
-
+    window.addEventListener('mouseup', () => { isDown = false; });
     window.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         move(e);
         e.preventDefault(); 
     });
 
-    // Event Listeners - Touch (Mobile)
     slider.addEventListener('touchstart', (e) => {
         isDown = true;
         move(e);
     }, { passive: true });
 
-    window.addEventListener('touchend', () => {
-        isDown = false;
-    });
-
+    window.addEventListener('touchend', () => { isDown = false; });
     window.addEventListener('touchmove', (e) => {
         if (!isDown) return;
         move(e);
@@ -260,11 +240,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         if (target) {
             const offsetTop = target.offsetTop - 80;
-            
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
         }
     });
 });
@@ -276,7 +252,6 @@ const spheres = document.querySelectorAll('.gradient-sphere');
 
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    
     spheres.forEach((sphere, index) => {
         const speed = 0.1 + (index * 0.05);
         const yPos = -(scrolled * speed);
@@ -291,13 +266,9 @@ if (window.innerWidth > 768) {
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
     cursor.style.cssText = `
-        position: fixed;
-        width: 20px;
-        height: 20px;
-        border: 2px solid var(--primary);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
+        position: fixed; width: 20px; height: 20px;
+        border: 2px solid var(--primary); border-radius: 50%;
+        pointer-events: none; z-index: 9999;
         transition: transform 0.2s ease, opacity 0.2s ease;
         opacity: 0;
     `;
@@ -305,15 +276,10 @@ if (window.innerWidth > 768) {
     
     const cursorDot = document.createElement('div');
     cursorDot.style.cssText = `
-        position: fixed;
-        width: 6px;
-        height: 6px;
-        background: var(--primary);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 10000;
-        transition: transform 0.1s ease;
-        opacity: 0;
+        position: fixed; width: 6px; height: 6px;
+        background: var(--primary); border-radius: 50%;
+        pointer-events: none; z-index: 10000;
+        transition: transform 0.1s ease; opacity: 0;
     `;
     document.body.appendChild(cursorDot);
     
@@ -322,20 +288,15 @@ if (window.innerWidth > 768) {
     let dotX = 0, dotY = 0;
     
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursor.style.opacity = '1';
-        cursorDot.style.opacity = '1';
+        mouseX = e.clientX; mouseY = e.clientY;
+        cursor.style.opacity = '1'; cursorDot.style.opacity = '1';
     });
     
     document.addEventListener('mouseleave', () => {
-        cursor.style.opacity = '0';
-        cursorDot.style.opacity = '0';
+        cursor.style.opacity = '0'; cursorDot.style.opacity = '0';
     });
     
-    // Interactive elements
     const interactiveElements = document.querySelectorAll('a, button, input, select, textarea');
-    
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'scale(1.5)';
@@ -361,7 +322,6 @@ if (window.innerWidth > 768) {
         
         requestAnimationFrame(animateCursor);
     }
-    
     animateCursor();
 }
 
@@ -373,9 +333,11 @@ if ('IntersectionObserver' in window) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
+                if(img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
+                }
             }
         });
     });
@@ -385,33 +347,85 @@ if ('IntersectionObserver' in window) {
     });
 }
 
-// ===================================
-// INITIALIZE ON LOAD
-// ===================================
-window.addEventListener('load', () => {
-    // Hide preloader if exists
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 300);
-    }
-    
-    updateActiveLink();
-    animateCounters();
-});
-
-console.log('%c Clean Wash & Co ', 'background: linear-gradient(135deg, #00f0ff, #00b8cc); color: #050814; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
-console.log('%c Site développé avec passion 🚀 ', 'color: #00f0ff; font-size: 14px;');
-
 function toggleCardSupp(button) {
     const content = button.nextElementSibling;
-    
     content.classList.toggle('active');
-    
     const icon = button.querySelector('i');
     if (icon) {
         icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
     }
 }
+
+// ===================================
+// LOGIQUE DU SLIDER DES PRESTATIONS (SCROLL SNAP)
+// ===================================
+let currentCategory = 'auto';
+
+function filterCategory(category) {
+    currentCategory = category;
+    
+    // 1. Mise à jour du style des boutons (Automobile / Mobilier)
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.innerText.toLowerCase().includes(category === 'auto' ? 'auto' : 'mobilier')) {
+            btn.classList.add('active');
+        }
+    });
+
+    // 2. Afficher toutes les cartes de la bonne catégorie, cacher les autres
+    const container = document.getElementById('mainSlider');
+    document.querySelectorAll('.service-card-single').forEach(card => {
+        if (card.getAttribute('data-type') === category) {
+            card.classList.add('show');
+        } else {
+            card.classList.remove('show');
+        }
+    });
+
+    // 3. Remettre le scroll tout à gauche automatiquement quand on change de catégorie
+    if(container) {
+        setTimeout(() => {
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 50);
+    }
+}
+
+// Fonction pour les flèches sur Ordinateur
+function moveSlider(direction) {
+    const container = document.getElementById('mainSlider');
+    if (!container) return;
+    
+    const activeCard = container.querySelector('.service-card-single.show');
+    if (!activeCard) return;
+
+    // Calcule la largeur d'une carte + le gap (20px) pour savoir de combien de pixels glisser
+    const cardWidth = activeCard.offsetWidth;
+    const gap = 20; 
+    
+    container.scrollBy({
+        left: direction * (cardWidth + gap),
+        behavior: 'smooth'
+    });
+}
+
+// ===================================
+// INITIALIZE ON LOAD
+// ===================================
+window.addEventListener('load', () => {
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => { preloader.style.display = 'none'; }, 300);
+    }
+    
+    updateActiveLink();
+    animateCounters();
+    
+    // Initialisation du slider sur la bonne catégorie au chargement
+    if(document.getElementById('mainSlider')) {
+        filterCategory('auto');
+    }
+});
+
+console.log('%c Clean Wash & Co ', 'background: linear-gradient(135deg, #00f0ff, #00b8cc); color: #050814; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
+console.log('%c Site mis à jour avec le slider mobile 🚀 ', 'color: #00f0ff; font-size: 14px;');
