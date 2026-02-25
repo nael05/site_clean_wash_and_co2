@@ -429,3 +429,27 @@ window.addEventListener('load', () => {
 
 console.log('%c Clean Wash & Co ', 'background: linear-gradient(135deg, #00f0ff, #00b8cc); color: #050814; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
 console.log('%c Site mis à jour avec le slider mobile 🚀 ', 'color: #00f0ff; font-size: 14px;');
+
+// ===================================
+// TARIFS INDEX (TOGGLE AUTO / DOMICILE)
+// ===================================
+function togglePricing(type) {
+    // Mettre à jour les boutons (Actif / Inactif)
+    const tabs = document.querySelectorAll('.p-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Trouver le bouton cliqué
+    event.currentTarget.classList.add('active');
+
+    // Mettre à jour les panneaux (Afficher / Cacher)
+    const panels = document.querySelectorAll('.pricing-panel');
+    panels.forEach(panel => {
+        panel.classList.remove('active');
+    });
+
+    // Afficher le bon panneau
+    const activePanel = document.getElementById(`panel-${type}`);
+    if(activePanel) {
+        activePanel.classList.add('active');
+    }
+}

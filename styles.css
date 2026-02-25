@@ -1316,3 +1316,177 @@ body {
         display: block; /* Affiche l'aide au glissement sur mobile */
     }
 }
+
+/* ===================================
+   TARIFS PREMIUM (INDEX)
+   =================================== */
+.pricing-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+}
+
+.pricing-toggle {
+    background: rgba(10, 14, 39, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 5px;
+    display: inline-flex;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.p-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-gray);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.p-tab.active {
+    background: var(--primary);
+    color: var(--bg-dark);
+    box-shadow: var(--shadow-glow);
+}
+
+.pricing-panels-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.pricing-panel {
+    display: none;
+    animation: fadeInPanel 0.4s ease forwards;
+}
+
+.pricing-panel.active {
+    display: block;
+}
+
+.pricing-card-premium {
+    background: linear-gradient(145deg, rgba(10, 14, 39, 0.7), rgba(5, 8, 20, 0.9));
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transition: var(--transition);
+}
+
+.pricing-card-premium:hover {
+    border-color: var(--primary);
+    box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15);
+    transform: translateY(-5px);
+}
+
+.p-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.p-card-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+}
+
+.p-card-header p {
+    color: var(--primary);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pricing-list-premium {
+    list-style: none;
+    margin-bottom: 2.5rem;
+}
+
+.pricing-list-premium li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    color: var(--text-gray);
+    transition: var(--transition);
+}
+
+.pricing-list-premium li:hover {
+    color: var(--text-light);
+    padding-left: 10px;
+    padding-right: 10px;
+    background: rgba(0, 240, 255, 0.03);
+    border-radius: 8px;
+    border-bottom-color: transparent;
+}
+
+.pricing-list-premium li:last-child {
+    border-bottom: none;
+}
+
+.p-item-name {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--primary);
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.p-item-price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.p-highlight {
+    background: rgba(0, 240, 255, 0.05) !important;
+    border: 1px solid rgba(0, 240, 255, 0.2) !important;
+    border-radius: 8px;
+    padding: 1rem 15px !important;
+    margin-top: 10px;
+}
+
+.p-highlight .p-item-name {
+    color: var(--primary);
+}
+
+.p-btn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.2rem;
+}
+
+@keyframes fadeInPanel {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .p-tab { padding: 10px 15px; font-size: 0.9rem; }
+    .pricing-card-premium { padding: 1.5rem; }
+    .p-card-header h3 { font-size: 1.4rem; }
+}
